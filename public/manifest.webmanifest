@@ -1,0 +1,36 @@
+{
+  "name": "MuteVideo — Remove Audio from Video Online",
+  "short_name": "MuteVideo",
+  "description": "Remove audio and mute MP4, iPhone MOV, and WebM videos 100% locally in your browser in 1 second with zero uploads and no watermark.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FBF7F0",
+  "theme_color": "#555555",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

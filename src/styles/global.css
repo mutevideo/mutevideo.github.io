@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+:root,
+html[data-theme="light"] {
+  --soft-sage-mist: #D9E4DD;
+  --warm-cream-alabaster: #FBF7F0;
+  --warm-greige-stone: #CDC9C3;
+  --charcoal-slate: #555555;
+  --pure-white: #FFFFFF;
+  --deep-charcoal-dark: #1E201F;
+  --elevated-slate-dark: #2A2D2B;
+
+  --bg-primary: #FBF7F0;
+  --bg-surface-card: #FFFFFF;
+  --workspace-box-bg: #D9E4DD;
+  --primary-action-btn: #555555;
+  --primary-action-hover: #3D3D3D;
+  --primary-action-text: #FBF7F0;
+  --secondary-surface-accent: #D9E4DD;
+  --border-color: #CDC9C3;
+  --text-primary: #555555;
+  --text-secondary: #6E6D6A;
+
+  --surface-subtle: rgba(217, 228, 221, 0.45);
+  --navbar-bg: rgba(251, 247, 240, 0.92);
+  --shadow-workspace: 0 24px 56px -18px rgba(85, 85, 85, 0.16), 0 8px 24px -8px rgba(85, 85, 85, 0.08);
+  color-scheme: light;
+}
+
+html[data-theme="dark"],
+html.dark {
+  --bg-primary: #1E201F;
+  --bg-surface-card: #2A2D2B;
+  --workspace-box-bg: #242826;
+  --primary-action-btn: #D9E4DD;
+  --primary-action-hover: #FBF7F0;
+  --primary-action-text: #1E201F;
+  --secondary-surface-accent: #555555;
+  --border-color: #555555;
+  --text-primary: #FBF7F0;
+  --text-secondary: #CDC9C3;
+
+  --surface-subtle: rgba(85, 85, 85, 0.32);
+  --navbar-bg: rgba(30, 32, 31, 0.92);
+  --shadow-workspace: 0 24px 60px -16px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(217, 228, 221, 0.14);
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    line-height: 1.55;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  button,
+  a,
+  select,
+  input {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--primary-action-btn);
+    outline-offset: 2px;
+  }
+}
+
+.hero-h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Smooth Soundwave-to-Mute & Workspace Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes soundwavePulse {
+  0%, 18% {
+    opacity: 0.95;
+    transform: scaleY(1);
+  }
+  48%, 72% {
+    opacity: 0.14;
+    transform: scaleY(0.28);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes muteSlashDraw {
+  0%, 24% {
+    stroke-dashoffset: 60;
+    opacity: 0.15;
+  }
+  45%, 76% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 60;
+    opacity: 0.15;
+  }
+}
+
+@keyframes progressShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 3.4s ease-in-out infinite;
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-soundwave-bar-1 {
+  transform-origin: center;
+  animation: soundwavePulse 3.2s ease-in-out infinite;
+}
+
+.animate-soundwave-bar-2 {
+  transform-origin: center;
+  animation: soundwavePulse 3.2s ease-in-out 0.16s infinite;
+}
+
+.animate-soundwave-bar-3 {
+  transform-origin: center;
+  animation: soundwavePulse 3.2s ease-in-out 0.32s infinite;
+}
+
+.animate-mute-slash {
+  stroke-dasharray: 60;
+  animation: muteSlashDraw 3.2s ease-in-out infinite;
+}
+
+.progress-shimmer-bar {
+  background: linear-gradient(90deg, #555555 0%, #D9E4DD 50%, #555555 100%);
+  background-size: 200% 100%;
+  animation: progressShimmer 1.6s linear infinite;
+}
+
+html[data-theme="dark"] .progress-shimmer-bar,
+html.dark .progress-shimmer-bar {
+  background: linear-gradient(90deg, #D9E4DD 0%, #555555 50%, #D9E4DD 100%);
+  background-size: 200% 100%;
+}
+
+/* Oversized Interactive Time Range Sliders */
+.mute-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--bg-surface-card);
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+}
+
+.mute-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--primary-action-btn);
+  border: 3px solid var(--bg-surface-card);
+  box-shadow: 0 3px 10px rgba(30, 32, 31, 0.25);
+  cursor: grab;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.mute-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  background: var(--primary-action-hover);
+}
+
+.mute-range-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+.mute-range-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--primary-action-btn);
+  border: 3px solid var(--bg-surface-card);
+  box-shadow: 0 3px 10px rgba(30, 32, 31, 0.25);
+  cursor: grab;
+}
+
+/* Support Developer CTA Button (#555555 bg + #D9E4DD text & border accent) */
+.support-dev-btn {
+  background-color: #555555;
+  color: #D9E4DD;
+  border: 2px solid #D9E4DD;
+}
+
+.support-dev-btn:hover {
+  background-color: #3D3D3D;
+  color: #FBF7F0;
+  border-color: #FBF7F0;
+  box-shadow: 0 8px 20px -6px rgba(85, 85, 85, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Details FAQ Accordion chevron */
+details[open] summary .faq-chevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-fade-slide-up,
+  .animate-soundwave-bar-1,
+  .animate-soundwave-bar-2,
+  .animate-soundwave-bar-3,
+  .animate-mute-slash,
+  .progress-shimmer-bar {
+    animation: none !important;
+  }
+}
